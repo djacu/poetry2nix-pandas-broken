@@ -28,21 +28,21 @@
           projectDir = ./.;
           inherit python;
           #preferWheels = true;
-          #overrides =
-          #  defaultPoetryOverrides.extend
-          #  (final: prev: {
-          #    #pandas =
-          #    #  prev.pandas.overridePythonAttrs
-          #    #  (
-          #    #    old: {
-          #    #      buildInputs =
-          #    #        (old.buildInputs or [])
-          #    #        ++ [
-          #    #          prev.cython_3
-          #    #        ];
-          #    #    }
-          #    #  );
-          #  });
+          overrides =
+            defaultPoetryOverrides.extend
+            (final: prev: {
+              pandas =
+                prev.pandas.overridePythonAttrs
+                (
+                  old: {
+                    buildInputs =
+                      (old.buildInputs or [])
+                      ++ [
+                        prev.cython_3
+                      ];
+                  }
+                );
+            });
         };
       in {
         devShells = {
